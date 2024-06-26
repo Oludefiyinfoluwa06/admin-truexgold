@@ -5,18 +5,18 @@ import { useAdmin } from "../contexts/useAdmin";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function SignIn() {
-    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [resetCode, setResetCode] = useState('');
+    const [newPassword, setNewPassword] = useState('');
     
-    const { login } = useAdmin();
+    const { resetPassword } = useAdmin();
     const navigate = useNavigate();
     
     const handleSignIn = async (e) => {
         e.preventDefault();
 
-        await login(username, email, password);
-        navigate('/');
+        await resetPassword(email, resetCode, newPassword);
+        navigate('/auth/signin');
     }
 
     return (
@@ -26,20 +26,6 @@ export default function SignIn() {
                 <div className="p-8 md:w-1/2">
                     <h2 className="text-2xl font-semibold text-center">Admin Sign in</h2>
                     <form className="mt-8 space-y-6" onSubmit={handleSignIn}>
-                        <div>
-                            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-                                Username
-                            </label>
-                            <input
-                                id="username"
-                                name="username"
-                                type="text"
-                                value={username}
-                                onChange={e => setUsername(e.target.value)}
-                                required
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                            />
-                        </div>
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                 Email
@@ -55,15 +41,29 @@ export default function SignIn() {
                             />
                         </div>
                         <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                                Password
+                            <label htmlFor="resetCode" className="block text-sm font-medium text-gray-700">
+                                resetCode
                             </label>
                             <input
-                                id="password"
-                                name="password"
+                                id="resetCode"
+                                name="resetCode"
+                                type="text"
+                                value={resetCode}
+                                onChange={e => setResetCode(e.target.value)}
+                                required
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700">
+                                New Password
+                            </label>
+                            <input
+                                id="newPassword"
+                                name="newPassword"
                                 type="password"
-                                value={password}
-                                onChange={e => setPassword(e.target.value)}
+                                value={newPassword}
+                                onChange={e => setNewPassword(e.target.value)}
                                 required
                                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                             />
@@ -71,11 +71,11 @@ export default function SignIn() {
                         <div className="flex items-center justify-between">
                             <div className="text-sm">
                                 <Link to="/auth/forgot-password" className="font-medium text-blue-600 hover:text-blue-500">
-                                Forgot password?
+                                I did not receive an email
                                 </Link>
                             </div>
                         </div>
-                        <Button text='Sign In' />
+                        <Button text='Reset Password' />
                     </form>
                 </div>
             </div>

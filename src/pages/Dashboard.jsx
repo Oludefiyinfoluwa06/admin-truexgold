@@ -22,27 +22,27 @@ export default function Dashboard() {
                     <Card
                         title="Monitor User's Activity"
                         description="Analyze user engagement metrics such as active users, session lengths, and retention rates. This data helps in understanding user behavior and improving the platform."
-                        route=""
+                        route="user-activity"
                     />
                     <Card
                         title="Sets And Adjusts Session Limits"
                         description="Set the basic parameters for a tapping session, such as the maximum number of coins that can be earned per session and the duration of each session."
-                        route=""
+                        route="set-limit"
                     />
                     <Card
                         title="Create Tasks"
                         description="Schedule tasks to update to increase user engagement and promote societal interactions within the community."
-                        route=""
+                        route="create-task"
                     />
                     <Card
                         title="Transaction Monitoring"
                         description="Get people with at least 1,000 followers to post your adverts and perform social engagement tasks for you on their social media account."
-                        route=""
+                        route="transaction-monitoring"
                     />
                     <Card
                         title="View User's Wallets"
                         description="Search for and select individual users to view their wallet information."
-                        route=""
+                        route="users-wallet"
                     />
                     <Card
                         title="Community Management"

@@ -2,7 +2,7 @@ import truexgoldLogo2 from "../assets/truexgold-logo2.png";
 
 export default function Navbar({ title }) {
     return (
-        <header className="flex justify-between items-center p-6 bg-white shadow-md">
+        <header className="flex justify-between items-center p-6 bg-white shadow-md mb-[40px]">
             <h1 className="text-2xl font-semibold">{title}</h1>
             <div className="flex items-center">
                 <img
