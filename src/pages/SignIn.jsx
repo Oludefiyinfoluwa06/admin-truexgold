@@ -21,7 +21,7 @@ export default function SignIn() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-900 to-blue-400">
-            <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden w-[600px]">
+            <div className="flex flex-col md:flex-row bg-white md:rounded-lg rounded-none shadow-lg overflow-hidden w-[600px]">
                 <AuthCard />
                 <div className="p-8 md:w-1/2">
                     <h2 className="text-2xl font-semibold text-center">Admin Sign in</h2>

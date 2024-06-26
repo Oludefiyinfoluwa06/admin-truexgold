@@ -13,45 +13,51 @@ export default function CreateTask() {
     const { createTask } = useAdmin();
     const navigate = useNavigate();
 
-    const handleCreateTask = async () => {
+    const handleCreateTask = async (e) => {
+        e.preventDefault();
+
         await createTask(title, description, reward);
-        navigate('/')
+        navigate('/tasks');
     }
     
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-r from-blue-900 to-blue-400">
             <Navbar title='Create task' />
 
-            <form className='bg-white w-[600px] mx-auto p-[40px] rounded' onSubmit={handleCreateTask}>
-                <div className='flex justify-between'>
-                    <div>
-                        <label htmlFor="title">Title</label>
-                        <input 
-                            type="text" 
-                            id="title" 
-                            value={title} 
-                            onChange={e => setTitle(e.target.value)} 
-                            className='w-full bg-[#A4A0A0] rounded-md p-2 py-1 outline-none'
-                        />
+            <form className="bg-white max-w-lg mx-auto p-8 rounded-lg shadow-md" onSubmit={handleCreateTask}>
+                <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
+                    <div className="w-full sm:w-1/2">
+                    <label htmlFor="title" className="block text-gray-700 font-semibold mb-2">Title</label>
+                    <input 
+                        type="text" 
+                        id="title" 
+                        value={title} 
+                        onChange={e => setTitle(e.target.value)} 
+                        className="w-full bg-gray-200 rounded-md p-2 outline-none focus:border-blue-500"
+                    />
                     </div>
-                    <div>
-                        <label htmlFor="reward">Reward</label>
-                        <input 
-                            type="text" 
-                            id="reward" 
-                            value={reward} 
-                            onChange={e => setReward(e.target.value)} 
-                            className='w-full bg-[#A4A0A0] rounded-md p-2 py-1 outline-none'
-                        />
+                    <div className="w-full sm:w-1/2">
+                    <label htmlFor="reward" className="block text-gray-700 font-semibold mb-2">Reward</label>
+                    <input 
+                        type="text" 
+                        id="reward" 
+                        value={reward} 
+                        onChange={e => setReward(e.target.value)} 
+                        className="w-full bg-gray-200 rounded-md p-2 outline-none focus:border-blue-500"
+                    />
                     </div>
                 </div>
-                <div className='flex flex-col justify-center items-start mt-2'>
-                    <label htmlFor="description">Description</label>
-                    <textarea id='description' onChange={e => setDescription(e.target.value)} className='mt-1 w-full bg-[#A4A0A0] outline-none p-2 rounded-lg'>{description}</textarea>
+                <div className="flex flex-col mt-4">
+                    <label htmlFor="description" className="block text-gray-700 font-semibold mb-2">Description</label>
+                    <textarea 
+                    id="description" 
+                    value={description} 
+                    onChange={e => setDescription(e.target.value)} 
+                    className="w-full bg-gray-200 rounded-lg p-2 outline-none focus:border-blue-500 h-32"
+                    />
                 </div>
-
-                <div className='flex items-center justify-center mt-[20px]'>
-                    <Button text='Submit' />
+                <div className="flex items-center justify-center mt-6">
+                    <Button text="Submit" />
                 </div>
             </form>
 

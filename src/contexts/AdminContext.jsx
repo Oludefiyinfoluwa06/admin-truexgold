@@ -14,8 +14,8 @@ export const AdminProvider = ({ children }) => {
         try {
             setLoading(true);
             const response = await axios.post(`https://truex-backend.vercel.app/api/admin/login`, { username, email, password });
-            localStorage.setItem('admin', response.data.admin);
-            localStorage.setItem('admin-token', response.data.token);
+            localStorage.setItem('admin', JSON.stringify(response.data.admin));
+            localStorage.setItem('admin-token', JSON.stringify(response.data.token));
         } catch (err) {
             setError(err.response.data.message);
         } finally {
@@ -32,6 +32,7 @@ export const AdminProvider = ({ children }) => {
 
             console.log(response);
         } catch (err) {
+            console.log(err);
             setError(err.response.data.message);
         } finally {
             setLoading(false);
@@ -47,6 +48,7 @@ export const AdminProvider = ({ children }) => {
 
             console.log(response);
         } catch (err) {
+            console.log(err);
             setError(err.response.data.message);
         } finally {
             setLoading(false);
@@ -62,7 +64,7 @@ export const AdminProvider = ({ children }) => {
         setLoading(true);
 
         try {
-            const token = localStorage.getItem('admin-token');
+            const token = JSON.parse(localStorage.getItem('admin-token'));
             const response = await axios.post(
                 `https://truex-backend.vercel.app/api/tasks/create`,
                 { title, description, reward },
@@ -80,7 +82,7 @@ export const AdminProvider = ({ children }) => {
     //     setLoading(true);
 
     //     try {
-    //         const token = localStorage.getItem('admin-token');
+    //         const token = JSON.parse(localStorage.getItem('admin-token'));
     //         const response = await axios.put(
     //             `https://truex-backend.vercel.app/api/tasks/edit/${taskId}`,
     //             { title, description, reward },
@@ -98,13 +100,15 @@ export const AdminProvider = ({ children }) => {
         setLoading(true);
 
         try {
-            const token = localStorage.getItem('admin-token');
-            await axios.delete(
+            const token = JSON.parse(localStorage.getItem('admin-token'));
+            const response = await axios.delete(
                 `https://truex-backend.vercel.app/api/tasks/delete/${taskId}`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
+            console.log(response);
             setTasks(tasks.filter(task => task._id !== taskId));
         } catch (err) {
+            console.log(err);
             setError(err.response.data.message);
         } finally {
             setLoading(false);
@@ -116,8 +120,10 @@ export const AdminProvider = ({ children }) => {
 
         try {
             const response = await axios.get(`https://truex-backend.vercel.app/api/tasks/`);
+            console.log(response);
             setTasks(response.data.tasks);
         } catch (err) {
+            console.log(err);
             setError(err.response.data.message);
         } finally {
             setLoading(false);
@@ -128,7 +134,7 @@ export const AdminProvider = ({ children }) => {
         setLoading(true);
 
         try {
-            const token = localStorage.getItem('admin-token');
+            const token = JSON.parse(localStorage.getItem('admin-token'));
             const response = await axios.get(`https://truex-backend.vercel.app/api/users/`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
@@ -142,12 +148,15 @@ export const AdminProvider = ({ children }) => {
 
     const setEarningLimit = async (newLimit) => {
         setLoading(true);
+        
+        const limit = parseInt(newLimit);
 
         try {
-            const token = localStorage.getItem('admin-token');
+            const token = JSON.parse(localStorage.getItem('admin-token'));
+
             const response = await axios.put(
-                `https://truex-backend.vercel.app/api/settings/global-earning-limit`,
-                { newLimit },
+                `https://truex-backend.vercel.app/api/setting/globalEarningLimit`,
+                { limit },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             return response.data;

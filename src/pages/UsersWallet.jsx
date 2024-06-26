@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useAdmin } from "../contexts/useAdmin";
 import Navbar from "../components/Navbar";
+import LogoutBtn from "../components/LogoutBtn";
 
 export default function UsersWallet() {
     const { fetchUsers, users } = useAdmin();
@@ -17,24 +18,26 @@ export default function UsersWallet() {
         <div className="min-h-screen flex flex-col bg-gradient-to-r from-blue-900 to-blue-400">
             <Navbar title="View Users' Wallet" />
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Wallet address</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map(user => (
-                        <div key={user._id}>
-                            <tr>
-                                <td>{user.username}</td>
-                                <td>{user.walletAddress}</td>
+            <div className="overflow-x-auto">
+                <table className="min-w-full bg-white border border-gray-200">
+                    <thead>
+                        <tr className="bg-blue-900 text-white">
+                            <th className="py-2 px-4 text-left">Username</th>
+                            <th className="py-2 px-4 text-left">Wallet Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {users.map(user => (
+                            <tr key={user._id} className="border-t border-gray-200 hover:bg-gray-100">
+                                <td className="py-2 px-4 capitalize">{user.username}</td>
+                                <td className="py-2 px-4">{user.walletAddress ? user.walletAddress : 'No wallet address'}</td>
                             </tr>
-                        </div>
-                    ))}
-                </tbody>
-            </table>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
+            <LogoutBtn />
         </div>
     );
 }
