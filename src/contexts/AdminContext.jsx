@@ -1,11 +1,7 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState } from 'react';
 import axios from 'axios';
 
-const AdminContext = createContext();
-
-export const useAdmin = () => {
-    return useContext(AdminContext);
-};
+export const AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
     const [admin, setAdmin] = useState(null);
@@ -26,6 +22,11 @@ export const AdminProvider = ({ children }) => {
             setError(err.response.data.message);
             setLoading(false);
         }
+    };
+
+    const logout = async () => {
+        localStorage.removeItem('admin');
+        localStorage.removeItem('admin-token');
     };
 
     const createTask = async (title, description, reward) => {
@@ -131,6 +132,7 @@ export const AdminProvider = ({ children }) => {
                 loading,
                 error,
                 login,
+                logout,
                 createTask,
                 editTask,
                 deleteTask,
