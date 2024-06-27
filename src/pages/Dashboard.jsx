@@ -36,7 +36,7 @@ export default function Dashboard() {
                     />
                     <Card
                         title="Transaction Monitoring"
-                        description="Get people with at least 1,000 followers to post your adverts and perform social engagement tasks for you on their social media account."
+                        description="Monitor the transactions of users, their total coins and their data."
                         route="transaction-monitoring"
                     />
                     <Card
@@ -44,11 +44,11 @@ export default function Dashboard() {
                         description="Search for and select individual users to view their wallet information."
                         route="users-wallet"
                     />
-                    <Card
+                    {/* <Card
                         title="Community Management"
                         description="Share regular updates on the platform, including new features, upcoming events, and other important announcements."
                         route=""
-                    />
+                    /> */}
                 </div>
                 <LogoutBtn />
             </main>
